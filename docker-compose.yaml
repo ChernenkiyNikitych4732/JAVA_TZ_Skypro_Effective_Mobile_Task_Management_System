@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  app:
+    image: 'java_tz_skypro_effective_mobile_task_management_system:latest'
+    build:
+      context: .
+    container_name: task_management_system
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_USER=Nikita
+      - POSTGRES_PASSWORD=12345
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/task_management_system
+      - SPRING_DATASOURCE_USERNAME=Nikita
+      - SPRING_DATASOURCE_PASSWORD=12345
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+    ports:
+      - "8081:8080"
+
+  db:
+    image: postgres
+    container_name: db
+    environment:
+      - POSTGRES_USER=Nikita
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_DB=task_management_system
+    ports:
+      - "5432:5432"
